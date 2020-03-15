@@ -1,0 +1,70 @@
+任务调度界面：http://10.145.195.75:8080/xxl-job-admin/toLogin
+
+项目
+/data/spark2/ofr_allocation/xxl-job-admin/
+/data/spark2/ofr_allocation/xxl-job-executor
+/data/spark2/ofr_allocation/zz/sfile/202003/
+
+git
+http://10.145.196.76:9080/billing/acct/acct-batch-task.git
+bss_acct_yuanhongwei   1qazxsw@
+
+原java项目:TransSchedule
+
+测试环境
+10.145.242.13   /data/spark2
+ abp 密码 vu4J#zz3Z
+测试 /data2/abp/abpFile
+
+
+**********生产要新建表%%%%%%%%%%%%%%
+sftp 创建免密登陆不需要？？？？？？？？？？？？
+服务器安装sqlplus客户端
+
+
+测试Oracle数据库
+iamzwdb_test =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 10.145.196.101)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = iamzwdb)
+    ))
+dbusr01、dbusr01123
+10.7.70.52
+ycl01 、ycl22user
+导出文件
+hadoop fs -get csv/201908*/P_ADJ_DETAIL_INFO/*.csv P_ADJ_DETAIL_INFO
+
+生产
+10.145.170.13
+用户：abp  密码 ：zkZH_d25c
+/app/abp/abpFile/finish
+
+java -server -Xmn512m -Xms1g -Xmx3g com.xxl.job.executor.XxlJobExecutorApplication
+
+mysql -h 10.145.242.14 -p 3306 -u ycluser  -p 'eastern234'
+mysql -h 10.145.198.150 -P 8866 -u te_acct_app -p 'te_acct_app123'
+
+
+删除number.txt
+先执行putfile
+hadoop fs -ls sqoop/DAT_ACCT_ITEM
+hadoop fs -ls sqoop/BILL_T_DETAIL_ABP_0
+hadoop fs -ls sqoop/BILL_T_DETAIL_ABP_1
+
+
+1、T_RUN_TASK 
+2、t_run_task_wf
+3、t_run_wf_detail 
+hadoop导入数据IOTransBill.sh   import   /user/spark2/sqoop
+hadoop导出数据IOTransBill.sh   export   /user/spark2/csv/
+
+sparkTrans.sh 1001/1002/1003 查数据库sparksql 导入数据
+
+
+开账什么时候结束？导出sql文件导入数据库么
+Oracle  BILL_T_DETAIL_IAM_JTJY数据什么时候导入到Oracle
+
